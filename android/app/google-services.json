@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "14403844747",
+    "project_id": "metiss-dev",
+    "storage_bucket": "metiss-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14403844747:android:8c540fe9923d65a2c1328e",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14403844747-vamjhorl4ger45tfbqvhq41iclne2q0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoNt4J7EsqBILr7IEOBbEw9WomGy02V1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14403844747-lbmckthkgro10a65gp22v3a71ko9vo93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
