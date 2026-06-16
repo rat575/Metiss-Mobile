@@ -19,43 +19,30 @@ Follow these steps to set up and run the project locally.
    git clone <repository_url>
    cd mobile
    ```
-
-2. **Environment Variables**
-   The application uses `flutter_dotenv` for configuration. Copy the example environment file and adjust the values if necessary:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. **Get Dependencies**
+2. **Get Dependencies**
    Run the following command to download the packages:
    ```bash
    flutter pub get
    ```
 
-4. **Firebase Configuration**
+3. **Firebase Configuration**
    The project requires Firebase configuration files:
    - Android: `android/app/google-services.json`
    - iOS: `ios/Runner/GoogleService-Info.plist`
 
    Ensure these files are present before building or running the application.
 
-5. **Run Code Generation**
+4. **Run Code Generation**
    This project uses `build_runner` for code generation (e.g., Riverpod, Freezed, JsonSerializable). Run the generator:
    ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
 
-6. **Run the Application**
+5. **Run the Application**
    ```bash
    flutter run
    ```
 
-## Running Tests
-
-To run the unit and widget tests:
-```bash
-flutter test
-```
 
 ## Code Quality & Formatting
 
