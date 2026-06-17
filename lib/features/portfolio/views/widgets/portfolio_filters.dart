@@ -145,7 +145,7 @@ void showMultiSelectFilterSheet({
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     builder: (context) {
-      List<String> tempSelections = List.from(selectedItems);
+      final List<String> tempSelections = List.from(selectedItems);
 
       return StatefulBuilder(
         builder: (context, setState) {

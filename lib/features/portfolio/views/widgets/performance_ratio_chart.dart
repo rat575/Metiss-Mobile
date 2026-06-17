@@ -194,7 +194,7 @@ class PerformanceRatioChart extends StatelessWidget {
 
     // Generate Y-axis tick labels (from high to low)
     final List<String> labels = [];
-    final int totalTicks = stepsPerSide * 2 + 1;
+    const int totalTicks = stepsPerSide * 2 + 1;
     for (int i = 0; i < totalTicks; i++) {
       final double val = (stepsPerSide - i) * step;
       final double displayVal = 1.0 + val;

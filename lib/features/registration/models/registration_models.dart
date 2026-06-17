@@ -201,7 +201,7 @@ class RegistrationListEntry {
   });
 
   factory RegistrationListEntry.fromJson(Map<String, dynamic> json) {
-    var systemsList = json['system'] as List? ?? [];
+    final systemsList = json['system'] as List? ?? [];
     return RegistrationListEntry(
       customer: CustomerDetails.fromJson(json['customer'] ?? {}),
       site: SiteDetails.fromJson(json['site'] ?? {}),
@@ -232,7 +232,7 @@ class RegistrationListResponse {
   });
 
   factory RegistrationListResponse.fromJson(Map<String, dynamic> json) {
-    var resultList = json['result'] as List? ?? [];
+    final resultList = json['result'] as List? ?? [];
     return RegistrationListResponse(
       result: resultList
           .map((entry) => RegistrationListEntry.fromJson(entry))

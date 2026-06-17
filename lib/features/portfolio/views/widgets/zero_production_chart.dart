@@ -165,7 +165,7 @@ class ZeroProductionChart extends StatelessWidget {
     }
 
     // 5. Calculate Y-axis limits
-    double maxVal = displayPoints
+    final double maxVal = displayPoints
         .where((p) => p.hasData)
         .fold<double>(
           1.0,
@@ -400,16 +400,16 @@ class _ZeroProductionBarGroup extends StatelessWidget {
                             barHeight,
                             2.0,
                           ), // ensure minimal height is visible if hasData
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                const Color(0xFFFFE9C6),
-                                const Color(0xFFE8615A),
+                                Color(0xFFFFE9C6),
+                                Color(0xFFE8615A),
                               ],
                             ),
-                            borderRadius: const BorderRadius.vertical(
+                            borderRadius: BorderRadius.vertical(
                               top: Radius.circular(4),
                             ),
                           ),

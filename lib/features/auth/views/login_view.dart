@@ -250,7 +250,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         children: [
                           TextSpan(
                             text: 'User Agreement',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             ),
@@ -259,10 +259,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 'https://dev-vista.metiss.ai/policy-viewer?src=metiss-user-agreement.pdf',
                               ),
                           ),
-                          TextSpan(text: ', '),
+                          const TextSpan(text: ', '),
                           TextSpan(
                             text: 'Privacy Policy',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             ),
@@ -271,10 +271,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 'https://dev-vista.metiss.ai/policy-viewer?src=metiss-privacy-policy.pdf',
                               ),
                           ),
-                          TextSpan(text: ', and '),
+                          const TextSpan(text: ', and '),
                           TextSpan(
                             text: 'Cookie Policy',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             ),
@@ -283,11 +283,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 'https://dev-vista.metiss.ai/policy-viewer?src=metiss-cookie-policy.pdf',
                               ),
                           ),
-                          TextSpan(text: '.'),
+                          const TextSpan(text: '.'),
                         ],
                       ),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 10,
                         color: AppTheme.primaryColor,
                       ),
@@ -316,7 +316,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 const SizedBox(height: 40),
 
                 // Footer
-                Center(
+                const Center(
                   child: Text(
                     '© 2025 Metiss, All rights reserved',
                     style: TextStyle(

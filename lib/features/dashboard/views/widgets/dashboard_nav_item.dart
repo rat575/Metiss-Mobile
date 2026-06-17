@@ -60,7 +60,7 @@ class DashboardNavItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               width: isSelected ? 6 : 0,
               height: isSelected ? 6 : 0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppTheme.accentColor,
                 shape: BoxShape.circle,
               ),

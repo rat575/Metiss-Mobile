@@ -69,10 +69,10 @@ class _RegistrationViewState extends ConsumerState<RegistrationView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Row
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Asset Registration',
                 style: TextStyle(
                   fontSize: 20,
