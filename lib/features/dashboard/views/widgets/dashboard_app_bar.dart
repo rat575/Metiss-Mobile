@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../auth/viewmodels/auth_provider.dart';
+import '../../../profile/views/profile_view.dart';
 
 class DashboardAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const DashboardAppBar({super.key});
@@ -114,6 +115,32 @@ class DashboardAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ),
             ),
             const SizedBox(height: 24),
+            // Profile Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context); // Close bottom sheet
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileView(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.person_outline_rounded, size: 20),
+                label: const Text('Profile'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.accentColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
             // Logout Button
             SizedBox(
               width: double.infinity,

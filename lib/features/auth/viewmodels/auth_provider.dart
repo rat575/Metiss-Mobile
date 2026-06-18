@@ -58,6 +58,19 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
     }
   }
+
+  void updateUserInfo({String? firstName, String? lastName}) {
+    if (state.user != null) {
+      final updated = state.user!.copyWith(
+        firstName: firstName,
+        lastName: lastName,
+        name: firstName != null && lastName != null
+            ? '$firstName $lastName'
+            : firstName ?? lastName ?? state.user!.name,
+      );
+      state = state.copyWith(user: updated);
+    }
+  }
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
