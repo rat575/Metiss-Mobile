@@ -9,6 +9,9 @@ import '../../../core/theme/app_theme.dart';
 import '../models/registration_models.dart';
 import '../viewmodels/registration_provider.dart';
 import '../widgets/asset_details_dialog.dart';
+import '../repositories/registration_repository_provider.dart';
+import 'manual_registration_view.dart';
+import 'add_assets_view.dart';
 
 class RegistrationView extends ConsumerStatefulWidget {
   const RegistrationView({super.key});
@@ -87,7 +90,14 @@ class _RegistrationViewState extends ConsumerState<RegistrationView> {
             icon: LucideIcons.edit,
             label: 'Manual Registration',
             color: const Color(0xFF00C49C),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ManualRegistrationView(),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 8),
           _buildActionButton(
@@ -831,11 +841,67 @@ class _RegistrationViewState extends ConsumerState<RegistrationView> {
                       color: Color(0xFF889492),
                       size: 20,
                     ),
-                    onPressed: () {
-                      // Action placeholder for edit
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Edit system ${system.name}')),
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => const Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.accentColor),
+                          ),
+                        ),
                       );
+
+                      try {
+                        final repository = ref.read(registrationRepositoryProvider);
+                        final fullEntry = await repository.getRegistrationBySystemUuid(system.uuid);
+
+                        if (!mounted) return;
+
+                        navigator.pop(); // Dismiss loading dialog
+
+                        navigator.push(
+                          MaterialPageRoute(
+                            builder: (context) => ManualRegistrationView(
+                              editEntry: fullEntry,
+                              openSystemName: system.name,
+                            ),
+                          ),
+                        );
+                        navigator.push(
+                          MaterialPageRoute(
+                            builder: (context) => AddAssetsView(
+                              customerPayload: {
+                                'uuid': fullEntry.customer.uuid,
+                                'firstName': fullEntry.customer.firstName,
+                                'lastName': fullEntry.customer.lastName,
+                                'email': fullEntry.customer.email,
+                                'phone': fullEntry.customer.phone ?? '',
+                              },
+                              sitePayload: {
+                                'uuid': fullEntry.site.uuid,
+                                'organizationUuid': fullEntry.system.isNotEmpty ? fullEntry.system[0].organizationUuid ?? '' : '',
+                                'siteAddress': fullEntry.site.siteAddress,
+                                'secondAddress': '',
+                                'city': fullEntry.site.city,
+                                'state': fullEntry.site.state,
+                                'zipCode': fullEntry.site.zipCode,
+                              },
+                              initialSystems: fullEntry.system,
+                              openSystemName: system.name,
+                            ),
+                          ),
+                        );
+                      } catch (e) {
+                        if (!mounted) return;
+                        navigator.pop(); // Dismiss loading dialog
+                        scaffoldMessenger.showSnackBar(
+                          SnackBar(content: Text('Error loading details: $e')),
+                        );
+                      }
                     },
                     tooltip: 'Edit Asset',
                   ),
@@ -846,12 +912,44 @@ class _RegistrationViewState extends ConsumerState<RegistrationView> {
                       color: Color(0xFF889492),
                       size: 20,
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      final scaffoldMessenger = ScaffoldMessenger.of(context);
+
                       showDialog(
                         context: context,
-                        builder: (context) =>
-                            AssetDetailsDialog(entry: entry, system: system),
+                        barrierDismissible: false,
+                        builder: (context) => const Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.accentColor),
+                          ),
+                        ),
                       );
+
+                      try {
+                        final repository = ref.read(registrationRepositoryProvider);
+                        final fullEntry = await repository.getRegistrationBySystemUuid(system.uuid);
+
+                        if (!mounted) return;
+                        navigator.pop(); // Dismiss loading dialog
+
+                        final fullSystem = fullEntry.system.firstWhere(
+                          (s) => s.uuid == system.uuid,
+                          orElse: () => system,
+                        );
+
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AssetDetailsDialog(entry: fullEntry, system: fullSystem),
+                        );
+                      } catch (e) {
+                        if (!mounted) return;
+                        navigator.pop(); // Dismiss loading dialog
+                        scaffoldMessenger.showSnackBar(
+                          SnackBar(content: Text('Error loading details: $e')),
+                        );
+                      }
                     },
                     tooltip: 'View Details',
                   ),

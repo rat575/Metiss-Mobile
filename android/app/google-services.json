@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoNt4J7EsqBILr7IEOBbEw9WomGy02V1A"
+          "current_key": "AIzaSyDRseNUmKjyE0AKFkPsn9YNK9NQQn9XF5k"
         }
       ],
       "services": {
@@ -29,6 +29,13 @@
             {
               "client_id": "14403844747-lbmckthkgro10a65gp22v3a71ko9vo93.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "14403844747-35hk4rorfv77hnpnkm7065649i8j6ogj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobile"
+              }
             }
           ]
         }

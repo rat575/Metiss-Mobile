@@ -39,15 +39,16 @@ class AssetDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       insetPadding: const EdgeInsets.symmetric(
         horizontal: 16.0,
         vertical: 24.0,
       ),
       child: Container(
-        constraints: BoxConstraints(
+        constraints: const BoxConstraints(
           maxWidth: 500,
-          maxHeight: MediaQuery.of(context).size.height * 0.8,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -84,7 +85,10 @@ class AssetDetailsDialog extends StatelessWidget {
             const Divider(color: Color(0xFFE5E5E5), height: 1),
 
             // Scrollable Content
-            Flexible(
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.6,
+              ),
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16.0,
@@ -200,19 +204,19 @@ class AssetDetailsDialog extends StatelessWidget {
                               ),
                               _buildDetailRow(
                                 'Manufacturer:',
-                                details['manufacturer'] ?? 'N/A',
+                                details['manufacturer']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Model:',
-                                details['model'] ?? 'N/A',
+                                details['model']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Size:',
-                                details['size'] ?? 'N/A',
+                                details['size']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Serial #:',
-                                details['serial'] ?? 'N/A',
+                                details['serial']?.toString() ?? 'N/A',
                               ),
                             ],
                           ),
@@ -254,19 +258,19 @@ class AssetDetailsDialog extends StatelessWidget {
                               ),
                               _buildDetailRow(
                                 'Manufacturer:',
-                                details['manufacturer'] ?? 'N/A',
+                                details['manufacturer']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Model:',
-                                details['model'] ?? 'N/A',
+                                details['model']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Size:',
-                                details['size'] ?? 'N/A',
+                                details['size']?.toString() ?? 'N/A',
                               ),
                               _buildDetailRow(
                                 'Serial #:',
-                                details['serial'] ?? 'N/A',
+                                details['serial']?.toString() ?? 'N/A',
                               ),
                             ],
                           ),
@@ -289,6 +293,7 @@ class AssetDetailsDialog extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF889492),
                       foregroundColor: Colors.white,
+                      minimumSize: const Size(0, 36),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

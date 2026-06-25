@@ -7,6 +7,7 @@ class AppTheme {
   static const Color secondaryColor = Color(0xFFFFD461);
   static const Color backgroundColor = Color(0xFFFFFBF0);
   static const Color inputBgColor = Color(0xFFFFFAE5);
+  static const Color assetDocumentColor = Color(0xFF009AE0);
 
   static ThemeData get lightTheme {
     return ThemeData(

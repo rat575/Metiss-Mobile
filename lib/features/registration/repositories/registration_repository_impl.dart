@@ -10,6 +10,12 @@ abstract class RegistrationRepository {
     String? sortOrder,
     String? status,
   });
+
+  Future<void> registerAsset(Map<String, dynamic> payload);
+  Future<List<dynamic>> getAddressPredictions(String query);
+  Future<Map<String, dynamic>> getPlaceDetails(String placeId, String address);
+  Future<Map<String, dynamic>> getManufacturerDetails();
+  Future<RegistrationListEntry> getRegistrationBySystemUuid(String systemUuid);
 }
 
 class RegistrationRepositoryImpl implements RegistrationRepository {
@@ -34,5 +40,30 @@ class RegistrationRepositoryImpl implements RegistrationRepository {
       sortOrder: sortOrder,
       status: status,
     );
+  }
+
+  @override
+  Future<void> registerAsset(Map<String, dynamic> payload) {
+    return _remoteDataSource.registerAsset(payload);
+  }
+
+  @override
+  Future<List<dynamic>> getAddressPredictions(String query) {
+    return _remoteDataSource.getAddressPredictions(query);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getPlaceDetails(String placeId, String address) {
+    return _remoteDataSource.getPlaceDetails(placeId, address);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getManufacturerDetails() {
+    return _remoteDataSource.getManufacturerDetails();
+  }
+
+  @override
+  Future<RegistrationListEntry> getRegistrationBySystemUuid(String systemUuid) {
+    return _remoteDataSource.getRegistrationBySystemUuid(systemUuid);
   }
 }

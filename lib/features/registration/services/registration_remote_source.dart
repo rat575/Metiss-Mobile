@@ -38,4 +38,79 @@ class RegistrationRemoteDataSource {
       rethrow;
     }
   }
+
+  Future<RegistrationListEntry> getRegistrationBySystemUuid(String systemUuid) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl/v1/asset-monitoring/systems/$systemUuid',
+      );
+      if (response.data != null) {
+        return RegistrationListEntry.fromJson(response.data);
+      }
+      throw Exception('Invalid system registration response');
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> registerAsset(Map<String, dynamic> payload) async {
+    try {
+      await _dio.put(
+        '$baseUrl/v1/asset-monitoring/registration',
+        data: payload,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<dynamic>> getAddressPredictions(String query) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl/v1/maps/autocomplete',
+        queryParameters: {'input': query},
+      );
+      if (response.data != null) {
+        return response.data['predictions'] as List? ?? [];
+      }
+      return [];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> getPlaceDetails(
+    String placeId,
+    String address,
+  ) async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl/v1/maps/place-details',
+        queryParameters: {
+          'place_id': placeId,
+          'address': address,
+        },
+      );
+      if (response.data != null) {
+        return response.data['result'] as Map<String, dynamic>? ?? {};
+      }
+      return {};
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> getManufacturerDetails() async {
+    try {
+      final response = await _dio.get(
+        '$baseUrl/v1/asset-monitoring/registration/manufacturer-details',
+      );
+      if (response.data != null) {
+        return response.data as Map<String, dynamic>;
+      }
+      return {};
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

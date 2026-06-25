@@ -92,6 +92,8 @@ class SystemDetails {
   final String? activationDate;
   final String? monitoringStartDate;
   final Map<String, dynamic>? assets;
+  final List<dynamic>? contractedEnergy;
+  final List<dynamic>? documents;
 
   SystemDetails({
     required this.uuid,
@@ -105,6 +107,8 @@ class SystemDetails {
     this.activationDate,
     this.monitoringStartDate,
     this.assets,
+    this.contractedEnergy,
+    this.documents,
   });
 
   factory SystemDetails.fromJson(Map<String, dynamic> json) {
@@ -120,6 +124,8 @@ class SystemDetails {
       activationDate: json['activationDate'],
       monitoringStartDate: json['monitoringStartDate'],
       assets: json['assets'] as Map<String, dynamic>?,
+      contractedEnergy: json['contractedEnergy'] as List<dynamic>?,
+      documents: json['documents'] as List<dynamic>?,
     );
   }
 
@@ -136,6 +142,8 @@ class SystemDetails {
       'activationDate': activationDate,
       'monitoringStartDate': monitoringStartDate,
       'assets': assets,
+      'contractedEnergy': contractedEnergy,
+      'documents': documents,
     };
   }
 
@@ -160,7 +168,11 @@ class SystemDetails {
     final panels = assets?['panels'] as List?;
     if (panels == null || panels.isEmpty) return null;
     final details = panels[0]['details'] as Map?;
-    return details?['noOfPanels'] as int?;
+    final val = details?['noOfPanels'];
+    if (val == null) return null;
+    if (val is int) return val;
+    if (val is double) return val.toInt();
+    return int.tryParse(val.toString());
   }
 
   String? get panelManufacturer {

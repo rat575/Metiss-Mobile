@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import '../models/user_entity.dart';
 import '../repositories/auth_repository.dart';
 
@@ -32,6 +33,10 @@ class AuthRepositoryImpl implements AuthRepository {
         name: user.displayName,
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint('--- FIREBASE AUTH EXCEPTION ---');
+      debugPrint('Code: ${e.code}');
+      debugPrint('Message: ${e.message}');
+      debugPrint('-------------------------------');
       throw _handleFirebaseAuthException(e);
     } catch (e) {
       throw Exception('An unknown error occurred during login');
